@@ -32,6 +32,16 @@ const DonorSchema = new mongoose.Schema({
     type: String,
     default: null,
   },
+  appoinmentNotification: {
+    type: Boolean,
+    date: Date.now,
+    hospitalId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Hospital',
+      default: null,
+    },
+    default: false,
+  },
 });
 
 const Donor = mongoose.model('Donor', DonorSchema);
