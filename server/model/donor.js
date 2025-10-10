@@ -33,14 +33,15 @@ const DonorSchema = new mongoose.Schema({
     default: null,
   },
   appoinmentNotification: {
-    type: Boolean,
-    date: Date.now,
+    appoinment: {
+      type: Boolean,
+      default: false,
+    },
     hospitalId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Hospital',
       default: null,
     },
-    default: false,
   },
 });
 
