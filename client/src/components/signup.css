@@ -1,0 +1,14 @@
+.login-button{
+  width: 25%;
+}
+
+form{
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  align-items: center;
+}
+
+.input-group{
+  width: 100%;
+}

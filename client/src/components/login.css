@@ -1,0 +1,210 @@
+/* Page Background */
+body{
+  background-color: #353535;
+}
+.body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-family: "Oxanium", "sans-serif";
+    }
+
+/* Card Styling */
+.login-card {
+    background: transparent; /* Transparent Black */
+    padding: 50px;
+    border-radius: 15px;
+    box-shadow: 0 0 15px #9742FF; /* Soft glow */
+    text-align: center;
+    width: 450px;
+    padding: 80px;
+    backdrop-filter: blur(7px);
+}
+
+/* Heading */
+.ku {
+    color: rgb(255, 255, 255);
+    /* font-weight: 20px; */
+    margin-bottom: 20px;
+}
+
+/* Input Fields */
+input {
+    width: 100%;
+    padding: 10px;
+    background: transparent;
+    border: 2px solid white;
+    /* border-radius: 5px; */
+    color: white;
+    font-size: 16px;
+    outline: none;
+}
+
+input::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* Button Styling */
+.buton {
+    padding: 10px;
+    width: 100%;
+    border: 2px solid white;
+    background: transparent;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: all 0.3s ease-in-out;
+    border-radius: 5px;
+}
+
+.buton:hover {
+    background: white;
+    color: black;
+    box-shadow: 0 0 10px white;
+}
+
+/* Centering Button */
+.btn {
+    display: flex;
+    justify-content: center;
+}
+
+/* Link Styling */
+p {
+    color: white;
+    margin-top: 10px;
+}
+
+p a {
+    color: gold;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+p a:hover {
+    text-decoration: underline;
+}
+
+label{
+    color: white;
+}
+
+/* Error Message */
+p[style="color: red;"] {
+    font-weight: bold;
+}
+
+.input-field {
+    width: 100%;
+    padding: 20px;
+    margin-bottom: 15px; 
+    border: 1px solid #ccc;
+    /* border-radius: 5px; */
+    font-size: 16px;
+}
+
+.input-group {
+    margin-bottom: 20px; 
+}
+
+.login-button {
+    width: 100%;
+    padding: 10px;
+    background-color: transparent;
+    color: white;
+    border: 1px solid white;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.login-button:hover {
+    background-color: #0056b3;
+}
+
+.signup-link{
+    margin-top: 15px;
+}
+
+
+
+  
+  .sign-card {
+    background: transparent; /* Transparent Black */
+    padding: 50px;
+    border-radius: 15px;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.5); /* Soft glow */
+    text-align: center;
+    width: 900px;
+    border: 2px solid white;
+  }
+  
+  h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .signup-form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .form-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    gap: 10px;
+  }
+  
+  .input-group {
+    width: 48%;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .input-group label {
+    font-weight: 500;
+    text-align: start;
+  }
+  
+  .input-group input,
+  .input-group select {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+  }
+  
+  .login-button {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    background-color: #7301FF;
+    color: white;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .login-button:hover {
+    background-color: #7301FFcc;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .login-card {
+      width: 80%;
+    }
+  
+    .form-row {
+      flex-direction: column;
+    }
+  
+    .input-group {
+      width: 100%;
+    }
+  }
+  
