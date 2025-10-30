@@ -9,7 +9,7 @@ const DonorSchema = new mongoose.Schema({
   fullName: {
     type: String,
     required: true,
-  },
+  },                                                                                                                                                                                                                 
   bloodType: {
     type: String,
     required: true,

@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
-import axios from 'axios';
-
-// Placeholder base URL for your Express backend
-const API_BASE_URL = 'http://localhost:5000/api/auth'; 
+import { useNavigate } from 'react-router-dom';
+import api from '../utils/axios.js';
 
 const styles = {
   // ... (Keep the existing styles object)
@@ -59,6 +57,7 @@ const styles = {
 const LoginPage = () => {
   const [formData, setFormData] = useState({ email: '', password: '' });
   const [message, setMessage] = useState('');
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -68,16 +67,21 @@ const LoginPage = () => {
     e.preventDefault();
     setMessage('Logging in...');
     try {
+      console.log("Entering try block");
+      
       // DEMO AXIOS: Sends email and password to the Express login endpoint
-      const response = await axios.post(`${API_BASE_URL}/login`, formData);
+      const response = await api.post('/login', formData);
 
-      // On successful login:
-      const user = response.data.user;
-      localStorage.setItem('token', response.data.token);
-      setMessage(`Success! Logged in as ${user.role}. Redirecting...`);
+      const {token, user} = response.data;
 
-      // In a real app, you would redirect here based on user.role
-      // Example: window.location.href = user.role === 'hospital' ? '/hospital/dashboard' : '/donor/dashboard';
+      //save the token to the localStorage:
+      localStorage.setItem('token', token);
+
+      console.log("Login Successful:", response.data);
+      console.log("Login token:", response.data.token);
+      console.log("local storage:", localStorage.getItem('token'));
+      
+      navigate('/dashboard');
 
     } catch (error) {
       console.error("Login Failed:", error.response || error);
@@ -93,7 +97,7 @@ const LoginPage = () => {
           <input 
             type="email" 
             name="email"
-            placeholder="Email (Hospital or Donor)" 
+            placeholder="Email" 
             style={styles.input} 
             value={formData.email}
             onChange={handleChange}

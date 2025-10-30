@@ -1,5 +1,6 @@
 import bcrypt from 'bcrypt';
 import User from '../model/user.js ';
+import jwt from 'jsonwebtoken';
 
 
 export const signUp = async (req, res) => {
@@ -49,6 +50,8 @@ export const signUp = async (req, res) => {
 export const login = async (req, res) => {
   try {
     const { email, password } = req.body;
+    console.log(email);
+    
 
     // Basic validation
     if (!email || !password) {
@@ -66,10 +69,26 @@ export const login = async (req, res) => {
     if (!isMatch) {
       return res.status(400).json({ message: 'Invalid email or password.' });
     }
+
+    //Creating payload for token
+    const payLoad = {
+      id: user.id,
+      role: user.role
+    };
+
+    // Creating the actual token:
+    const token = jwt.sign(
+      payLoad,
+      process.env.JWT_SECRET,
+      {expiresIn: '1h'}
+    );
+
     // Successful login
     res.status(200).json({ 
-      message: 'Login successful.', 
-      user: { 
+      message: 'Login successful.',
+      token,
+      user: {
+        id: user._id,
         email: user.email, 
         role: user.role 
       } 
