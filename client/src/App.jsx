@@ -1,9 +1,6 @@
 import { useState } from 'react'
-import './App.css'
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
-import Login from './components/Login.jsx';
-import Signup from './components/Signup.jsx';
-import Dashboard from './components/dashboard.jsx';
+import Home from './components/home.jsx';
 
 function App() {
 
@@ -11,10 +8,7 @@ function App() {
     <>
     <Router>
       <Routes>
-        <Route path="" element={<Login/>}/>
-        <Route path="/signup" element={<Signup/>}/>
-        <Route path="/dashboard" element={<Dashboard/>}/>
-
+        <Route path="" element={<Home/>}/>
       </Routes>
     </Router>
     </>
