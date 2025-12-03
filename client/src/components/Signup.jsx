@@ -163,7 +163,7 @@ const SignupPage = () => {
         <p style={{ marginTop: '15px', color: message.includes('Success') ? '#4CAF50' : '#D32F2F', fontSize: '14px' }}>
             {message}
         </p>
-        <a href="/login" style={styles.link}>
+        <a href="/" style={styles.link}>
           Already have an account? Log In
         </a>
       </div>
