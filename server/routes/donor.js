@@ -3,6 +3,6 @@ import { createDonor } from '../control/donor.js';
 
 const donorRouter = express.Router();
 
-donorRouter.post('/donor/:userId', createDonor);
+donorRouter.post('/donorRegister', createDonor);
 
 export default donorRouter;

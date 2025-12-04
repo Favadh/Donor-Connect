@@ -3,7 +3,6 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 import mongoose from 'mongoose';
 import donorRouter from './routes/donor.js';
-import userRouter from './routes/user.js';
 import hospitalRouter from './routes/hospital.js';
 
 dotenv.config();
@@ -24,7 +23,7 @@ mongoose.connect(MONGO_URI)
     process.exit(1);
     });
 
-app.use('/api', hospitalRouter, donorRouter, userRouter);
+app.use('/api', hospitalRouter, donorRouter);
 
 // Error handling middleware
 app.use((err, req, res, next) => {
