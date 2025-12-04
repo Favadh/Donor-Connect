@@ -2,11 +2,7 @@ import Donor from "../model/donor.js";
 
 export const createDonor = async (req, res) => {
   try {
-    const {fullName, bloodType, immediateScreening, phoneNo, city} = req.body;
-
-    const userId = req.params.userId;
-
-    if (!userId) return res.status(400).json({ error: "Missing userId in URL" });
+    const {fullName, email, bloodType, phoneNo, city} = req.body;
 
     // Basic validation
     if (!fullName || !bloodType || !immediateScreening || !phoneNo || !city) {
@@ -14,18 +10,16 @@ export const createDonor = async (req, res) => {
     }
 
     const donor = new Donor({
-      userId,
       fullName,
+      email,
       bloodType,
-      immediateScreening,
       phoneNo,
       city,
-      isAvailable: true, // default to true
     }); 
 
     await donor.save();
 
-    res.status(201).json({msg: "Donor profile created successfully", donor});
+    res.status(201).json({msg: "Donor Registered successfully", donor});
   } catch (err) {
     console.error("Server error:",err);
     res.status(500).json({ error: err});

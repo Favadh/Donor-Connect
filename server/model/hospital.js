@@ -1,11 +1,6 @@
 import mongoose from "mongoose";
 
 const HospitalSchema = new mongoose.Schema({
-  userId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
-    required: true,
-  },
   hospitalName: {
     type: String,
     required: true,
@@ -24,9 +19,14 @@ const HospitalSchema = new mongoose.Schema({
     type: String,
     default: null,
   },
-  hospitalImage: {
+  email: {
     type: String,
-    default: null,
+    required: true,
+    unique: true,
+  },
+  password: {
+    type: String,
+    required: true,
   },
 });
 
