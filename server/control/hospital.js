@@ -55,7 +55,7 @@ export const signUp = async (req, res) => {
 
     await newUser.save();
     res.status(201).json({ 
-      message: 'Hospital registered successfully.',
+      message: 'Hospital register Success.',
       token,
      });
 
@@ -105,14 +105,16 @@ export const login = async (req, res) => {
       {expiresIn: '1h'}
     );
 
+    let loc='/dashboard';
+    if(hospital.hospitalName==="Temp Name"){
+      loc='/formdata';
+    }
+
     // Successful login
     res.status(200).json({ 
       message: 'Login successful.',
       token,
-      hospital: {
-        id: hospital._id,
-        email: hospital.email, 
-      } 
+      loc,
     });
 
   } catch (err) {
@@ -150,7 +152,7 @@ export const createHospital = async (req, res) => {
 
     await hospital.save();
 
-    res.status(201).json({ msg: "Hospital profile created successfully", hospital });
+    res.status(201).json({ msg: "Hospital profile created successfully"});
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: err.message });
@@ -192,7 +194,8 @@ export const appointDonor = async (req, res) => {
     `Dear Donor,`,
     ``,
     `Thank you for volunteering to donate blood. ${hospitalData.hospitalName || 'The hospital'} would like to schedule you for a donation—please check in within 3 days.`,
-    ``,
+    `
+    `,
     `Hospital Details:`,
     `Name: ${hospitalData.hospitalName || 'N/A'}`,
     `Phone: ${hospitalData.phoneNo || 'N/A'}`,
@@ -229,7 +232,7 @@ export const appointDonor = async (req, res) => {
   });
   console.log('Email sent:', emailVerification.response);
 
-  res.status(200).json({ msg: "Donor appointed successfully"});
+  res.status(200).json({ msg: "Sented appointment email to donor successfully." });
 
  } catch (err) {
     console.error(err);

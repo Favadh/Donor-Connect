@@ -23,6 +23,10 @@ const DonorSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  age:{
+    type: Number,
+    required: true,
+  },
   profileImage: {
     type: String,
     default: null,

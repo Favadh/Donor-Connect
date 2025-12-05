@@ -1,13 +1,8 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import api from '../../utils/axios.js';
-import { Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
-// Placeholder base URL for your Express backend
-const API_BASE_URL = 'http://localhost:8000/api'; 
-
-// Use the same styles object or import it if in a separate file
 const styles = {
-  // ... (Keep the existing styles object)
   container: {
     display: 'flex',
     justifyContent: 'center',
@@ -49,7 +44,7 @@ const styles = {
   button: {
     width: '100%',
     padding: '12px',
-    backgroundColor: '#4CAF50', 
+    backgroundColor: '#D32F2F', 
     color: 'white',
     border: 'none',
     borderRadius: '8px',
@@ -61,7 +56,7 @@ const styles = {
   link: {
     marginTop: '15px',
     display: 'block',
-    color: '#D32F2F', 
+    color: '#4CAF50', 
     textDecoration: 'none',
     fontSize: '14px',
   },
@@ -72,9 +67,9 @@ const SignupPage = () => {
     email: '',
     password: '',
     confirmPassword: '',
-    role: 'donor',
   });
   const [message, setMessage] = useState('');
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -90,26 +85,19 @@ const SignupPage = () => {
     }
 
     try {
-      // Data to send to the backend for User creation
       const userData = {
         email: formData.email,
         password: formData.password,
-        role: formData.role, // Critical field for your system
       };
-      
-      // DEMO AXIOS: Sends user data to the Express register endpoint
-      const response = await api.post(`${API_BASE_URL}/signup`, userData);
+
+      const response = await api.post('/signup', userData);
 
       // On successful registration:
       console.log('token:', response.data.token);
-      
       localStorage.setItem('token', response.data.token);
-      setMessage(`Success! Account created. Please complete your ${formData.role} profile.`);
+      setMessage(response.data.message);
 
-      // Redirect logic to the next step (profile creation)
-      // Example: window.location.href = formData.role === 'hospital' ? '/hospital/setup' : '/donor/setup';
-
-      Navigate('/dashboard');
+      navigate('/formdata');
       
     } catch (error) {
       console.error("Signup Failed:", error.response || error);
@@ -120,18 +108,8 @@ const SignupPage = () => {
   return (
     <div style={styles.container}>
       <div style={styles.card}>
-        <h2 style={styles.header}>✨ Join DonorConnect</h2>
+        <h2 style={styles.header}>Join DonorConnect</h2>
         <form onSubmit={handleSubmit}>
-          <select 
-            name="role"
-            value={formData.role} 
-            onChange={handleChange} 
-            style={styles.select}
-          >
-            <option value="donor">I am a Donor 🩸</option>
-            <option value="hospital">I am a Hospital / Coordinator 🏥</option>
-          </select>
-
           <input 
             type="email" 
             name="email"

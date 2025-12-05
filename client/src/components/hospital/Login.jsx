@@ -72,7 +72,8 @@ const LoginPage = () => {
       // DEMO AXIOS: Sends email and password to the Express login endpoint
       const response = await api.post('/login', formData);
 
-      const {token, user} = response.data;
+      const {token, hospital} = response.data;
+      setMessage(response.data.message);
 
       //save the token to the localStorage:
       localStorage.setItem('token', token);
@@ -81,7 +82,7 @@ const LoginPage = () => {
       console.log("Login token:", response.data.token);
       console.log("local storage:", localStorage.getItem('token'));
       
-      navigate('/dashboard');
+      navigate(response.data.loc);
 
     } catch (error) {
       console.error("Login Failed:", error.response || error);
