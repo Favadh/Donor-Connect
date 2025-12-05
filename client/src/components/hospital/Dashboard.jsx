@@ -64,6 +64,9 @@ const dummyDonors = [
 const Dashboard = () => {
   const [isLogoutHovered, setIsLogoutHovered] = useState(false);
   const [donors, setDonors] = useState([]);
+  const [error, setError] = useState(null);
+  const [selectedBloodType, setSelectedBloodType] = useState('');
+  const [selectedCity, setSelectedCity] = useState('');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -74,12 +77,23 @@ const Dashboard = () => {
         
         setDonors(response.data.donors);
       } catch (err) {
-        setError('Failed to fetch game accounts');
+        setError('Failed to fetch donors');
         console.error(err);
       }
     };
     fetchDonors();
   }, []);
+
+  // Get unique values for filters
+  const bloodTypes = [...new Set((donors || []).map(donor => donor.bloodType))];
+  const cities = [...new Set((donors || []).map(donor => donor.city))];
+
+  // Filter donors based on selected blood type and city
+  const filteredDonors = (donors || []).filter(donor => {
+    const bloodTypeMatch = selectedBloodType ? donor.bloodType === selectedBloodType : true;
+    const cityMatch = selectedCity ? donor.city === selectedCity : true;
+    return bloodTypeMatch && cityMatch;
+  });
 
   const handleAppoint = async (donorId) => {
     try {
@@ -92,7 +106,6 @@ const Dashboard = () => {
   };
 
   const handleLogout = () => {
-    // Placeholder for logout logic
     console.log('User logging out...');
     localStorage.removeItem('token');
     navigate('/');
@@ -118,27 +131,62 @@ const Dashboard = () => {
         </button>
       </header>
 
-      <main style={styles.cardSection}>
-        {(Array.isArray(donors) ? donors : donors.data || []).map((donor) => (
-          <div key={donor.id || donor._id} style={styles.card}>
-            <div style={styles.profilePicContainer}>
-              <img src={donor.imageUrl} alt={donor.fullName} style={styles.profilePic} />
+      <main style={styles.mainContent}>
+        <div style={styles.filterContainer}>
+          <select
+            style={{
+              ...styles.filterSelect,
+              border: '1px solid #e0e0e0',
+              boxShadow: '0 2px 6px rgba(0, 0, 0, 0.1)',
+              backgroundColor: 'white',
+            }}
+            value={selectedBloodType}
+            onChange={(e) => setSelectedBloodType(e.target.value)}
+          >
+            <option value="">Filter by Blood Type</option>
+            {bloodTypes.map(type => (
+              <option key={type} value={type}>{type}</option>
+            ))}
+          </select>
+          <select
+            style={{
+              ...styles.filterSelect,
+              border: '1px solid #e0e0e0',
+              boxShadow: '0 2px 6px rgba(0, 0, 0, 0.1)',
+              backgroundColor: 'white',
+            }}
+            value={selectedCity}
+            onChange={(e) => setSelectedCity(e.target.value)}
+          >
+            <option value="">Filter by City</option>
+            {cities.map(city => (
+              <option key={city} value={city}>{city}</option>
+            ))}
+          </select>
+        </div>
+
+        <div style={styles.cardSection}>
+          {filteredDonors.map((donor) => (
+            <div key={donor.id || donor._id} style={styles.card}>
+              <div style={styles.profilePicContainer}>
+                <img src="https://cdn-icons-png.freepik.com/512/8861/8861091.png" alt={donor.fullName} style={styles.profilePic} />
+              </div>
+              <div style={styles.cardContent}>
+                <h2 style={styles.donorName}>{donor.fullName}</h2>
+                <p style={styles.donorDetail}><strong>Blood Type:</strong> {donor.bloodType}</p>
+                <p style={styles.donorDetail}><strong>Age:</strong> {donor.age}</p>
+                <p style={styles.donorDetail}><strong>City:</strong> {donor.city}</p>
+                <p style={styles.donorDetail}><strong>Phone:</strong> {donor.phoneNo}</p>
+              </div>
+              <button
+                style={styles.appointButton}
+                onClick={() => handleAppoint(donor._id)}
+              >
+                Appoint
+              </button>
             </div>
-            <div style={styles.cardContent}>
-              <h2 style={styles.donorName}>{donor.fullName}</h2>
-              <p style={styles.donorDetail}><strong>Blood Type:</strong> {donor.bloodType}</p>
-              <p style={styles.donorDetail}><strong>Age:</strong> {donor.age}</p>
-              <p style={styles.donorDetail}><strong>City:</strong> {donor.city}</p>
-              <p style={styles.donorDetail}><strong>Phone:</strong> {donor.phoneNo}</p>
-            </div>
-            <button
-              style={styles.appointButton}
-              onClick={() => handleAppoint(donor._id)}
-            >
-              Appoint
-            </button>
-          </div>
-        ))}
+          ))}
+        </div>
       </main>
     </div>
   );
@@ -181,9 +229,26 @@ const styles = {
     fontWeight: 'bold',
     transition: 'background-color 0.3s, color 0.3s',
   },
+  mainContent: {
+    paddingTop: '80px', // Offset for fixed header
+  },
+  filterContainer: {
+    display: 'flex',
+    justifyContent: 'center',
+    gap: '1rem',
+    padding: '1.5rem 2rem',
+    backgroundColor: '#fff',
+    borderBottom: '1px solid #eee',
+  },
+  filterSelect: {
+    padding: '0.6rem 1rem',
+    borderRadius: '5px',
+    border: '1px solid #ccc',
+    fontSize: '1rem',
+    minWidth: '220px',
+  },
   cardSection: {
     padding: '2rem',
-    paddingTop: '130px', // Offset for fixed header
     display: 'grid',
     gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', // Responsive grid
     gap: '1.5rem',

@@ -25,6 +25,7 @@ export default function Home() {
   const [form, setForm] = useState(initialForm);
   const [errors, setErrors] = useState({});
   const [msg, setMsg] = useState(null);
+  const [coverPhoto, setCoverPhoto] = useState(null);
   const [loading, setLoading] = useState(false);
 
 
@@ -35,6 +36,11 @@ export default function Home() {
       setErrors(prev => ({ ...prev, [name]: undefined }));
     }
   };
+
+  const handlePhotoChange = (e) => {
+      setCoverPhoto(e.target.files[0]);
+    };
+
 
   const handleScreeningChange = e => {
     const { name, checked } = e.target;
@@ -77,6 +83,7 @@ export default function Home() {
       return;
     }
 
+
     const payload = {
       fullName: form.fullName.trim(),
       bloodType: form.bloodType,
@@ -84,6 +91,7 @@ export default function Home() {
       city: form.city.trim(),
       age: Number(form.age),
       email: form.email.trim(),
+      profileImage: coverPhoto,
     };
 
     setLoading(true);
@@ -360,6 +368,18 @@ export default function Home() {
                 </select>
                 {errors.bloodType && <small style={{ color: '#b91c1c' }}>{errors.bloodType}</small>}
               </div>
+            </div>
+
+            <div className="field">
+              <label className="label" htmlFor="image">Upload Image (Optional)</label>
+              <input
+              id="image"
+              name="profilePhoto"
+              type="file"
+              accept="image/*"
+              className="home-input"
+              onChange={handlePhotoChange}
+              />
             </div>
 
             <div className="field-row">
