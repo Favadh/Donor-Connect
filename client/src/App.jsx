@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
-import Home from './components/home.jsx';
+import Home from './components/Home.jsx';
 import LoginPage from './components/hospital/Login.jsx';
 import SignupPage from './components/hospital/Signup.jsx';
 import Formdata from './components/hospital/Formdata.jsx';
