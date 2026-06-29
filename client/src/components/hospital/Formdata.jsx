@@ -20,121 +20,7 @@ const Formdata = () => {
   const [success, setSuccess] = useState('')
   const navigate = useNavigate();
 
-  const styles = {
-    header: {
-      position: 'fixed',
-      top: 0,
-      left: 0,
-      right: 0,
-      height: 64,
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      background: '#ffffff',
-      borderBottom: '1px solid rgba(0,0,0,0.06)',
-      boxShadow: '0 6px 18px rgba(0,0,0,0.06)',
-      zIndex: 1000,
-      backdropFilter: 'saturate(120%) blur(6px)',
-    },
-    headerInner: {
-      maxWidth: 720,
-      width: '100%',
-      padding: '0 24px',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'flex-start',
-    },
-    brand: {
-      display: 'flex',
-      alignItems: 'center',
-      gap: 12,
-    },
 
-    brandText: {
-      fontFamily: 'Arial, sans-serif',      
-      fontSize: 30,
-      fontWeight: 700,
-      color: '#f44336', // professional navy
-      letterSpacing: '0.3px',
-      textTransform: 'none',
-      marginLeft: 2,
-      textShadow: 'none',
-      fontStyle: 'normal',
-    },
-
-    nav: {
-      display: 'flex',
-      gap: 18,
-      alignItems: 'center',
-    },
-    navLink: {
-      fontSize: 14,
-      color: '#555',
-      textDecoration: 'none',
-      cursor: 'pointer',
-      padding: '8px 12px',
-      borderRadius: 8,
-      transition: 'background 0.18s, color 0.18s',
-    },
-
-    container: {
-      maxWidth: 720,
-      margin: '96px auto',
-      padding: 24,
-      border: '1px solid #e0e0e0',
-      borderRadius: 8,
-      background: '#f9f9f9',
-      fontFamily: 'Segoe UI, Tahoma, Geneva, Verdana, sans-serif',
-      color: '#333',
-      boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
-    },
-    title: { marginBottom: 12, fontSize: 24, color: '#f44336', fontWeight: 700 },
-    formGrid: {
-      display: 'grid',
-      gridTemplateColumns: '1fr',
-      gap: 16,
-    },
-    fullWidth: { gridColumn: '1 / -1' },
-    formGroup: { display: 'flex', flexDirection: 'column', marginBottom: 12 },
-    label: { marginBottom: 6, fontSize: 14, fontWeight: 600, color: '#555' },
-    input: {
-      padding: '10px 12px',
-      border: '1px solid #ccc',
-      borderRadius: 8,
-      fontSize: 14,
-      backgroundColor: '#fff',
-      boxShadow: '0 2px 4px rgba(0, 0, 0, 0.05)',
-    },
-    btnRow: {
-      display: 'flex',
-      gap: 12,
-      marginTop: 16,
-      justifyContent: 'flex-end',
-    },
-    button: {
-      padding: '10px 16px',
-      background: '#f44336',
-      color: '#fff',
-      border: 'none',
-      borderRadius: 8,
-      cursor: 'pointer',
-      fontWeight: 600,
-      transition: 'background 0.3s',
-    },
-    cancel: {
-      padding: '10px 16px',
-      background: '#fff',
-      color: '#f44336',
-      border: '1px solid #f44336',
-      borderRadius: 8,
-      cursor: 'pointer',
-      fontWeight: 600,
-      transition: 'background 0.3s',
-    },
-    status: { marginTop: 10, fontSize: 14 },
-    error: { color: '#b00020' },
-    success: { color: '#006600' },
-  }
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -235,45 +121,222 @@ const Formdata = () => {
 
   return (
     <>
-      <header style={styles.header}>
-        <div style={styles.headerInner}>
-          <div style={styles.brand}>
-            <div style={styles.brandText}>DonorConnect</div>
+      <header className="formdata-header">
+        <style>{`
+          .formdata-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #ffffff;
+            border-bottom: 1px solid rgba(0,0,0,0.06);
+            box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+            z-index: 1000;
+            backdrop-filter: saturate(120%) blur(6px);
+          }
+          .formdata-header-inner {
+            max-width: 720px;
+            width: 100%;
+            padding: 0 24px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            box-sizing: border-box;
+          }
+          .formdata-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+          }
+          .formdata-brand-text {
+            font-family: Arial, sans-serif;      
+            font-size: 30px;
+            font-weight: 700;
+            color: #f44336;
+            letter-spacing: 0.3px;
+            text-transform: none;
+            margin-left: 2px;
+            text-shadow: none;
+            font-style: normal;
+          }
+          .formdata-container {
+            max-width: 720px;
+            width: calc(100% - 32px);
+            margin: 96px auto 32px;
+            padding: 24px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            background: #f9f9f9;
+            font-family: Segoe UI, Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            box-sizing: border-box;
+          }
+          .formdata-title {
+            margin-bottom: 12px;
+            font-size: 24px;
+            color: #f44336;
+            font-weight: 700;
+          }
+          .formdata-form-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 16px;
+          }
+          .formdata-form-group {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 12px;
+          }
+          .formdata-label {
+            margin-bottom: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #555;
+          }
+          .formdata-input {
+            padding: 10px 12px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 14px;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            box-sizing: border-box;
+            width: 100%;
+          }
+          .address-row {
+            display: flex;
+            gap: 8px;
+          }
+          .address-city {
+            flex: 1;
+          }
+          .address-state {
+            width: 180px;
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23555' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            background-size: 14px;
+            padding-right: 32px;
+          }
+          .address-zip {
+            width: 120px;
+          }
+          .formdata-btn-row {
+            display: flex;
+            gap: 12px;
+            margin-top: 16px;
+            justify-content: flex-end;
+          }
+          .formdata-button {
+            padding: 10px 16px;
+            background: #f44336;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.3s;
+          }
+          .formdata-button:hover {
+            background: #d32f2f;
+          }
+          .formdata-cancel {
+            padding: 10px 16px;
+            background: #fff;
+            color: #f44336;
+            border: 1px solid #f44336;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.3s;
+          }
+          .formdata-cancel:hover {
+            background: #ffeeee;
+          }
+          .formdata-status {
+            margin-top: 10px;
+            font-size: 14px;
+          }
+          .formdata-error {
+            color: #b00020;
+          }
+          .formdata-success {
+            color: #006600;
+          }
+
+          /* Responsiveness breakpoint */
+          @media (max-width: 600px) {
+            .formdata-container {
+              margin: 80px 16px 24px;
+              padding: 16px;
+            }
+            .formdata-brand-text {
+              font-size: 24px;
+            }
+            .formdata-title {
+              font-size: 20px;
+            }
+            .address-row {
+              flex-direction: column;
+              gap: 8px;
+            }
+            .address-state, .address-zip {
+              width: 100%;
+            }
+            .formdata-btn-row {
+              flex-direction: column-reverse;
+              gap: 10px;
+            }
+            .formdata-button, .formdata-cancel {
+              width: 100%;
+              padding: 12px;
+            }
+          }
+        `}</style>
+        <div className="formdata-header-inner">
+          <div className="formdata-brand">
+            <div className="formdata-brand-text">DonorConnect</div>
           </div>
         </div>
       </header>
 
-      <div style={styles.container}>
-        <div style={styles.title}>Register a Hospital</div>
+      <div className="formdata-container">
+        <div className="formdata-title">Register a Hospital</div>
         <form onSubmit={handleSubmit}>
-          <div style={styles.formGrid}>
-            <div style={{ ...styles.formGroup, ...styles.fullWidth }}>
-              <label style={styles.label}>Hospital Name *</label>
+          <div className="formdata-form-grid">
+            <div className="formdata-form-group">
+              <label className="formdata-label">Hospital Name *</label>
               <input
                 name="hospitalName"
                 value={form.hospitalName}
                 onChange={handleChange}
-                style={styles.input}
+                className="formdata-input"
                 type="text"
                 aria-label="Hospital Name"
               />
             </div>
 
-            <div style={{ ...styles.formGroup, ...styles.fullWidth }}>
-              <label style={styles.label}>Google Maps Link *</label>
+            <div className="formdata-form-group">
+              <label className="formdata-label">Google Maps Link *</label>
               <input
                 name="gMapLink"
                 value={form.gMapLink}
                 onChange={handleChange}
-                style={styles.input}
+                className="formdata-input"
                 placeholder="https://maps.google.com/..."
                 type="url"
                 aria-label="Google Maps Link"
               />
             </div>
 
-            <div style={{ ...styles.formGroup, ...styles.fullWidth }}>
-              <label style={styles.label}>Address *</label>
+            <div className="formdata-form-group">
+              <label className="formdata-label">Address *</label>
 
               <input
                 name="street"
@@ -281,20 +344,21 @@ const Formdata = () => {
                 onChange={(e) =>
                   setForm((s) => ({ ...s, address: { ...s.address, street: e.target.value } }))
                 }
-                style={{ ...styles.input, marginBottom: 8 }}
+                className="formdata-input"
+                style={{ marginBottom: 8 }}
                 placeholder="Street"
                 type="text"
                 aria-label="Street"
               />
 
-              <div style={{ display: 'flex', gap: 8 }}>
+              <div className="address-row">
                 <input
                   name="city"
                   value={form.address.city}
                   onChange={(e) =>
                     setForm((s) => ({ ...s, address: { ...s.address, city: e.target.value } }))
                   }
-                  style={{ ...styles.input, flex: 1 }}
+                  className="formdata-input address-city"
                   placeholder="City"
                   type="text"
                   aria-label="City"
@@ -306,7 +370,7 @@ const Formdata = () => {
                   onChange={(e) =>
                     setForm((s) => ({ ...s, address: { ...s.address, state: e.target.value } }))
                   }
-                  style={{ ...styles.input, width: 180, appearance: 'none' }}
+                  className="formdata-input address-state"
                   aria-label="State"
                 >
                   <option value="">Select State</option>
@@ -327,7 +391,7 @@ const Formdata = () => {
                   onChange={(e) =>
                     setForm((s) => ({ ...s, address: { ...s.address, zipCode: e.target.value } }))
                   }
-                  style={{ ...styles.input, width: 120 }}
+                  className="formdata-input address-zip"
                   placeholder="ZIP Code"
                   type="text"
                   aria-label="ZIP Code"
@@ -335,13 +399,13 @@ const Formdata = () => {
               </div>
             </div>
 
-            <div style={{ ...styles.formGroup, ...styles.fullWidth }}>
-              <label style={styles.label}>Phone *</label>
+            <div className="formdata-form-group">
+              <label className="formdata-label">Phone *</label>
               <input
                 name="phoneNo"
                 value={form.phoneNo}
                 onChange={handleChange}
-                style={styles.input}
+                className="formdata-input"
                 placeholder="+91"
                 type="tel"
                 aria-label="Phone"
@@ -349,18 +413,18 @@ const Formdata = () => {
             </div>
           </div>
 
-          <div style={styles.btnRow}>
-            <button type="button" onClick={handleClear} style={styles.cancel} disabled={loading}>
+          <div className="formdata-btn-row">
+            <button type="button" onClick={handleClear} className="formdata-cancel" disabled={loading}>
               Reset
             </button>
-            <button type="submit" style={styles.button} disabled={loading}>
+            <button type="submit" className="formdata-button" disabled={loading}>
               {loading ? 'Submitting...' : 'Register Hospital'}
             </button>
           </div>
 
-          <div style={styles.status}>
-            {error && <div style={styles.error}>{error}</div>}
-            {success && <div style={styles.success}>{success}</div>}
+          <div className="formdata-status">
+            {error && <div className="formdata-error">{error}</div>}
+            {success && <div className="formdata-success">{success}</div>}
           </div>
         </form>
       </div>

@@ -331,6 +331,64 @@ export default function Home() {
     order: -1;
   }
 }
+
+@media (max-width: 768px) {
+  .home-container {
+    padding: 1.25rem;
+    padding-top: 80px;
+  }
+  .home-form {
+    padding: 1.75rem;
+  }
+  .home-aside {
+    padding: 1.75rem;
+  }
+  .home-header {
+    padding: 1rem 1.5rem;
+  }
+  .aside-big {
+    font-size: 2.8rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .field-row {
+    flex-direction: column;
+    gap: 0;
+  }
+  .home-title {
+    font-size: 1.35rem;
+  }
+  .aside-big {
+    font-size: 2.4rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .home-container {
+    padding: 0.75rem;
+    padding-top: 75px;
+  }
+  .home-form {
+    padding: 1.25rem;
+  }
+  .home-aside {
+    padding: 1.25rem;
+  }
+  .home-header {
+    padding: 0.75rem 1rem;
+  }
+  .header-logo {
+    font-size: 1.15rem;
+  }
+  .header-login-btn {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.85rem;
+  }
+  .aside-big {
+    font-size: 2rem;
+  }
+}
       `}</style>
 
         <div className="home-card" role="region" aria-label="Donor registration card">
